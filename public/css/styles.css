@@ -1,0 +1,59 @@
+@font-face {
+  font-family: Hind-Regular;
+  src: url(fonts/hind/Hind-Regular.ttf);
+}
+@font-face {
+  font-family: Hind-Bold;
+  src: url(fonts/hind/Hind-Bold.ttf);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font: normal 14px Hind-Regular !important;
+}
+.hind-bold {
+  font: bold 14px Hind-Bold !important;
+}
+header {
+  background-color: #A256F6;
+  height: 180px;
+}
+header ul {
+  margin: 0; /* Обнуляем значение отступов */
+  padding: 4px; /* Значение полей */
+}
+header ul li {
+  display: inline; /* Отображать как строчный элемент */
+  margin-right: 45px; /* Отступ слева */
+  padding: 3px; /* Поля вокруг текста */
+}
+.f-height { height: 100%}
+.f-width { width: 100%}
+header a {
+  text-decoration: none;
+  color: white;
+  font-size: 26px;
+}
+header a:hover {
+  text-decoration: underline;
+  color: white;
+}
+.main-slider {
+  width: 100%;
+  max-height: 720px;
+}
+.main-slider__item {
+  width: 100%;
+}
+.main-slider img {
+  min-width: 100%;
+  width: 100%;
+  max-height: 720px;
+  object-fit: cover;
+}
+.main-banner .owl-dots {
+  margin-top: -75px !important;
+  position: relative;
+  z-index: 9999;
+}
