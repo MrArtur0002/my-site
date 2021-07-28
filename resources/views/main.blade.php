@@ -44,9 +44,140 @@
                     </div>
                 </div>
             </section>
+            <section class="page-blocks">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 d-flex justify-content-center">
+                            <div class="page-item">
+                                <div class="page-item-content">
+                                    <div class="item-title"> О себе</div>
+                                    <div class="item-content">
+                                        <div class="item-content-line d-flex">
+                                            <div class="item-content-line__icon">
+                                                <img src="{{URL::asset("images/icons/diplom.png")}}" />
+                                            </div>
+                                            <div class="item-content-line__text">
+                                                Бакалавр (УГАТУ)
+                                            </div>
+                                        </div>
+                                        <div class="item-content-line d-flex">
+                                            <div class="item-content-line__icon">
+                                                <img src="{{URL::asset("images/icons/diplom.png")}}" />
+                                            </div>
+                                            <div class="item-content-line__text">
+                                                Магистр (УГАТУ)
+                                            </div>
+                                        </div>
+                                        <div class="item-content-line d-flex">
+                                            <div class="item-content-line__icon">
+                                                <img src="{{URL::asset("images/icons/front.png")}}" />
+                                            </div>
+                                            <div class="item-content-line__text">
+                                                Frontend Dev
+                                            </div>
+                                        </div>
+                                        <div class="item-content-line d-flex">
+                                            <div class="item-content-line__icon">
+                                                <img src="{{URL::asset("images/icons/backend.png")}}" />
+                                            </div>
+                                            <div class="item-content-line__text">
+                                                Backend Dev
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 d-flex justify-content-center">
+                            <div class="page-item">
+                                <div class="page-item-content">
+                                    <div class="item-title"> Проекты </div>
+                                    <div class="item-content">
+                                        <div class="item-content-line d-flex">
+                                            <div class="item-content-line__icon">
+                                                <img src="{{URL::asset("images/icons/port.png")}}" />
+                                            </div>
+                                            <div class="item-content-line__text">
+                                                2 Проекта
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 d-flex justify-content-center">
+                            <div class="page-item">
+                                <div class="page-item-content">
+                                    <div class="item-title"> Манчкин</div>
+                                    <div class="item-content">
+                                        <div class="item-content-line d-flex">
+                                            <div class="item-content-line__icon">
+                                                <img src="{{URL::asset("images/icons/deck-cards.png")}}" />
+                                            </div>
+                                            <div class="item-content-line__text">
+                                                Колода из 200 карт
+                                            </div>
+                                        </div>
+                                        <div class="item-content-line d-flex">
+                                            <div class="item-content-line__icon">
+                                                <img src="{{URL::asset("images/icons/race.png")}}" />
+                                            </div>
+                                            <div class="item-content-line__text">
+                                                6 видов рас
+                                            </div>
+                                        </div>
+                                        <div class="item-content-line d-flex">
+                                            <div class="item-content-line__icon">
+                                                <img src="{{URL::asset("images/icons/class.png")}}" />
+                                            </div>
+                                            <div class="item-content-line__text">
+                                                8 видов классов
+                                            </div>
+                                        </div>
+                                        <div class="item-content-line d-flex">
+                                            <div class="item-content-line__icon">
+                                                <img src="{{URL::asset("images/icons/icon-1.png")}}" />
+                                            </div>
+                                            <div class="item-content-line__text">
+                                                2 режима игры
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 d-flex justify-content-center">
+                            <div class="page-item">
+                                <div class="page-item-content">
+                                    <div class="item-title"> Форум</div>
+                                    <div class="item-content">
+                                        <div class="item-content-line d-flex">
+                                            <div class="item-content-line__icon">
+                                                <img src="{{URL::asset("images/icons/port.png")}}" />
+                                            </div>
+                                            <div class="item-content-line__text">
+                                                2 Проекта
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </main>
         <footer>
-
+          <div class="container f-height">
+              <div class="d-flex f-height align-items-center justify-content-center">
+                  <ul>
+                      <li><a href="#">О себе</a></li>
+                      <li><a href="#">О себе</a></li>
+                      <li><a href="#">О себе</a></li>
+                      <li><a href="#">О себе</a></li>
+                  </ul>
+              </div>
+          </div>
         </footer>
 
         <script src="{{ URL::asset("js/jquery.min.js") }}"></script>

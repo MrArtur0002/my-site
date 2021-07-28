@@ -20,3 +20,22 @@ Route::get('/', function () {
 Route::get('/about', function () {
   return 'Обо мне страничка';
 });
+
+Route::group(
+  [
+      'prefix' => 'admin',
+      'namespace' => 'Admin',
+      'as' => 'admin.',
+  ],
+  function(){
+      Route::get('/',['as' => 'dashboard','uses' => 'DashboardController@show']);
+  }
+);
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
