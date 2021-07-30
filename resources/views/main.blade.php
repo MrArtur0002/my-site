@@ -15,18 +15,7 @@
         <link rel="stylesheet" href="{{ URL::asset("css/owl.theme.default.css") }}">
     </head>
     <body>
-        <header>
-            <div class="container f-height">
-                <div class="d-flex align-items-center justify-content-center f-height">
-                    <ul>
-                        <li><a href="#">Главная</a></li>
-                        <li><a href="#">Шаблоны</a></li>
-                        <li><a href="#">О себе</a></li>
-                        <li><a href="#">Проекты</a></li>
-                    </ul>
-                </div>
-            </div>
-        </header>
+        @include('header')
         <main>
             <section class="main-banner">
                 <div class="main-slider owl-carousel owl-theme">
@@ -167,18 +156,7 @@
                 </div>
             </section>
         </main>
-        <footer>
-          <div class="container f-height">
-              <div class="d-flex f-height align-items-center justify-content-center">
-                  <ul>
-                      <li><a href="#">О себе</a></li>
-                      <li><a href="#">О себе</a></li>
-                      <li><a href="#">О себе</a></li>
-                      <li><a href="#">О себе</a></li>
-                  </ul>
-              </div>
-          </div>
-        </footer>
+        @include('footer')
 
         <script src="{{ URL::asset("js/jquery.min.js") }}"></script>
         <script src="{{ URL::asset("js/owl.carousel.min.js") }}"></script>
