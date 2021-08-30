@@ -1,0 +1,77 @@
+.right-menu {
+	background-color: #e5e5e5;
+}
+.left-menu {
+	background-color: grey;
+}
+.right-menu, .left-menu {
+	min-height: 100vh;
+}
+.menu-block {
+	width: 80%;
+	background-color: #a7b7ed;
+	height: auto;
+}
+.category-title {
+	text-align: center;
+	margin-top: 50px;
+}
+.menu-block ul li {
+	margin-top: 20px;
+	text-align: center;
+	list-style-type: none;
+	background-color: white;
+	border: 1px solid black;
+	cursor: pointer;
+}
+a {
+	color: black !important;
+	text-decoration: none !important;
+}
+.menu-block ul {
+	padding: 0;
+	width: 80%;
+}
+.menu-block ul li:hover {
+	background-color: #9eeca5;
+}
+.munchkin-top-menu {
+	padding: 15px 30px 10px 30px;
+	margin-top: 15px;
+	background-color: #a7b7ed;;
+}
+.munchkin-top-menu ul li {
+	display: inline;
+	margin-right: 10px;
+	background-color: white;
+	padding: 10px;
+	border: 1px solid black;
+	cursor: pointer;
+}
+.munchkin-top-menu ul li:hover {
+	background-color: #9eeca5;
+}
+.munchkin-content {
+	padding: 15px;
+	position: relative;
+	background-color: white;
+	height: 100%;
+}
+.f-height {
+ height: 100%;
+}
+.f-width {
+	width: 100%;
+}
+.left-menu .f-height {
+	padding-bottom: 15px;
+}
+.munchkin-filters {
+	height: 30px;
+	border-bottom: 2px solid black;
+}
+.card {
+	border: 1px solid black !important;
+	height: 230px;
+	margin-top: 20px;
+}
