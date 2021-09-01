@@ -16,7 +16,9 @@
     <div class="container">
     <div class="row">
         <div class="col-9 left-menu">
-            @include('admin.Dashboard.munchkin')
+            @if ($content)
+                @include('admin.Dashboard.'.$content)
+            @endif
         </div>
         <div class="col-3 right-menu d-flex justify-content-center">
             @include('admin.Dashboard.category-menu')

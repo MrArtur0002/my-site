@@ -29,9 +29,11 @@ Route::group(
   ],
   function(){
       Route::get('/',['as' => 'dashboard','uses' => 'DashboardController@show']);
-      
+
       Route::get('/munchkin',['uses' => 'MunchkinController@show']);
-  } 
+
+      Route::get('/munchkin/addCard',['uses' => 'addCardController@show']);
+  }
 );
 
 Auth::routes();

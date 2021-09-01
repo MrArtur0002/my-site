@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class addCardController extends Controller
 {
   public function show()
     {
@@ -13,4 +13,8 @@ class DashboardController extends Controller
 
       return view('Admin.Dashboard.show', ['content' => 'create-card']);
     }
+
+  public function index(Request $request) {
+
+  }
 }

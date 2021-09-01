@@ -9,8 +9,8 @@ class MunchkinController extends Controller
 {
   public function show()
     {
-      
-      
-      return view('Admin.Dashboard.show');
+
+
+      return view('Admin.Dashboard.show', ['content' => 'munchkin']);
     }
 }
