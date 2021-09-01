@@ -29,12 +29,10 @@ Route::group(
   ],
   function(){
       Route::get('/',['as' => 'dashboard','uses' => 'DashboardController@show']);
-  }
+      
+      Route::get('/munchkin',['uses' => 'MunchkinController@show']);
+  } 
 );
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
