@@ -11,10 +11,28 @@ class addCardController extends Controller
     {
 
 
-      return view('Admin.Dashboard.show', ['content' => 'create-card']);
+      return view('Admin.Dashboard.show', ['content' => 'Munchkin.create-card', 'params' => []]);
     }
 
-  public function index(Request $request) {
+    /**
+     * Сохранить новую карту.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
 
+  public function addCard(Request $request) {
+    $newCard = $request->validate([
+        'title' => 'required|unique:cards|max:255',
+        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'description' => 'required|max:1024',
+    ]);
+
+    $params['responce'] = true;
+    $imageName = time().'.'.$request->image->extension();
+
+    $request->image->move(public_path('images/manchkin/cards'), $imageName);
+
+    return view('Admin.Dashboard.show', ['content' => 'Munchkin.create-card', 'params' => $params]);
   }
 }

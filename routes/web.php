@@ -32,7 +32,10 @@ Route::group(
 
       Route::get('/munchkin',['uses' => 'MunchkinController@show']);
 
+      Route::get('/munchkin/cards',['uses' => 'CardsController@show']);
+
       Route::get('/munchkin/addCard',['uses' => 'addCardController@show']);
+      Route::post('/munchkin/addCard',['uses' => 'addCardController@addCard']);
   }
 );
 

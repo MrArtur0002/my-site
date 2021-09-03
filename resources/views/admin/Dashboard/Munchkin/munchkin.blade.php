@@ -1,11 +1,6 @@
 <div class="d-flex flex-column f-height">
     <div class="munchkin-top-menu d-lfex">
-        <ul>
-            <li><a href="/admin/munchkin"> Главная</a></li>
-            <li><a href="/admin/munchkin/card"> Карточки</a></li>
-            <li><a href="#"> Игроки</a></li>
-            <li><a href="#"> Режимы игры</a></li>
-        </ul>
+        @include('admin.Dashboard.Munchkin.parts.mainNav')
     </div>
     <div class="munchkin-content flex-fill">
         <div class="munchkin-filters">

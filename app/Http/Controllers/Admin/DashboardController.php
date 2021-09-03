@@ -11,6 +11,6 @@ class DashboardController extends Controller
     {
 
 
-      return view('Admin.Dashboard.show', ['content' => 'create-card']);
+      return view('Admin.Dashboard.show', ['content' => '']);
     }
 }
