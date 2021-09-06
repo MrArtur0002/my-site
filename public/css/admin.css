@@ -72,9 +72,21 @@ a {
 }
 .card {
 	border: 1px solid black !important;
-	height: 230px;
+	height: 320px;
 	margin-top: 20px;
 }
 .form-div {
     margin-bottom: 30px;
+}
+.card-image {
+    height: 240px;
+    margin-bottom: 10px;
+    text-align: center
+}
+.card-image img {
+    height: 100%;
+}
+.card-title {
+    text-align: center;
+    padding-top: 15px;
 }

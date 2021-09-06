@@ -17,7 +17,8 @@
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
-        {{ Form::model(['url' => '/admin/munchkin/addCard', 'files' => true, 'method' => 'POST']) }}
+        <form action="/admin/munchkin/addCard" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
+            @csrf <!-- {{ csrf_field() }} -->
             <div class="form-div">
                 {{ Form::label('card_category', 'Категория карточки') }}
                 {{ Form::select('card_category', ['' => 'Нет категории'])}}
@@ -40,6 +41,6 @@
             <div class="form-div">
                 {{ Form::submit('Создать') }}
             </div>
-        {{ Form::close() }}
+        </form>
     </div>
 </div>
