@@ -16,6 +16,11 @@
                     <div class="card-title">
                         {{$card['title']}}
                     </div>
+                    <div class="card-edit">
+                        <a href="/admin/munchkin/editCard/{{$card['id']}}">
+                            <img src="{{URL::asset("images/manchkin/admin-icons/edit-card.png")}}">
+                        </a>
+                    </div>
                 </div>
             </div>
             @endforeach

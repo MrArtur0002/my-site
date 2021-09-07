@@ -36,6 +36,8 @@ Route::group(
 
       Route::get('/munchkin/addCard',['uses' => 'addCardController@show']);
       Route::post('/munchkin/addCard',['uses' => 'addCardController@addCard']);
+      Route::get('/munchkin/editCard/{id}',['uses' => 'editCardController@show']);
+      Route::post('/munchkin/editCard/{id}',['uses' => 'editCardController@editCard']);
   }
 );
 

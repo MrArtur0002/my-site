@@ -90,3 +90,19 @@ a {
     text-align: center;
     padding-top: 15px;
 }
+.card-edit {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 38px;
+    height: 38px;
+    border: 1px solid black;
+    border-radius: .20rem;
+}
+.card-edit img {
+    width: 100%;
+    height: 100%;
+}
+.card-edit:hover {
+    background-color: lightblue;
+}
