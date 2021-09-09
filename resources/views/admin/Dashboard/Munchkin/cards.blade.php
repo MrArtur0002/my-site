@@ -3,6 +3,13 @@
         @include('admin.Dashboard.Munchkin.parts.mainNav')
     </div>
     <div class="munchkin-content flex-fill">
+        <div class="cards-options">
+            <ul>
+                <li class="active">Карточки</li>
+                <li><a href="/admin/munchkin/addCard"> Добавить </a></li>
+                <li><a href="/admin/munchkin/category"> Категории карт</a></li>
+            </ul>
+        </div>
         <div class="munchkin-filters">
             Фильтры (в будущем ближайшем)
         </div>

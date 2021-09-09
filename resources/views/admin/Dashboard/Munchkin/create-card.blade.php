@@ -3,6 +3,13 @@
         @include('admin.Dashboard.Munchkin.parts.mainNav')
     </div>
     <div class="munchkin-content flex-fill">
+        <div class="cards-options">
+            <ul>
+                <li><a href="/admin/munchkin/cards">Карточки</a></li>
+                <li class="active">Добавить</li>
+                <li><a href="/admin/munchkin/category"> Категории карт</a></li>
+            </ul>
+        </div>
         <h1> Создание новой карточки </h1>
         @if (isset($params['responce']))
             <div style="color: white; background-color: green;">Данные успешно сохранены!!!</div>

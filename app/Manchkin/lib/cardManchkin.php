@@ -1,5 +1,5 @@
 <?php
-namespace App\Manchkin\lib\cardMachkin;
+/*namespace App\Manchkin\lib\cardMachkin;
 
 
 class cardManchkin
@@ -9,4 +9,4 @@ class cardManchkin
     function __construct(int $cardId) {
         $this->$cardId = $cardId;
     }
-}
+}*/
