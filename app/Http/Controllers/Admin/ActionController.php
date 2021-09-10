@@ -10,10 +10,11 @@ class ActionController extends Controller
 {
   public function show()
     {
-      $monster = new CategoryFactory(1);
+      $categoryFactory = new CategoryFactory();
+      $monster = $categoryFactory->getCategory(1);
       $test = [];
       if ($monster)
-        $test['test'] = $monster::action();
+        $test['test'] = $monster->action();
 
       return view('Admin.Dashboard.show', ['content' => 'Munchkin.action', 'params' => $test]);
     }

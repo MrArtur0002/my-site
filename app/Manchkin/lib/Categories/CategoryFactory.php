@@ -15,7 +15,7 @@ interface CategoryManchkin
 }
 
 class CategoryFactory {
-    function __construct(int $categoryId)  {
+    function getCategory(int $categoryId)  {
         switch ($categoryId) {
             case MONSTER_CATEGORY:
                 return new MonsterManchkin();
