@@ -11,7 +11,7 @@ class ActionController extends Controller
   public function show()
     {
       $categoryFactory = new CategoryFactory();
-      $monster = $categoryFactory->getCategory(1);
+      $monster = $categoryFactory->getCategory(7);
       $test = [];
       if ($monster)
         $test['test'] = $monster->action();

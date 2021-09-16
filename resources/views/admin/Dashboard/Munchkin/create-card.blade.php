@@ -28,7 +28,7 @@
             @csrf <!-- {{ csrf_field() }} -->
             <div class="form-div">
                 {{ Form::label('card_category', 'Категория карточки') }}
-                {{ Form::select('card_category', ['' => 'Нет категории'])}}
+                {{ Form::select('card_category', $params['categories'])}}
             </div>
             <div class="form-div">
                 {{ Form::label('title', 'Название карточки') }}

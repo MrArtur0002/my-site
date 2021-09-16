@@ -5,14 +5,20 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Card;
+use App\Category;
 
 class addCardController extends Controller
 {
   public function show()
     {
+      $categories = Category::all();
 
+      /* Сделать категории в нужный вид */
+      foreach ($categories as $key => $category) {
+          $params['categories'][$category['id']] = $category['name'];
+      }
 
-      return view('Admin.Dashboard.show', ['content' => 'Munchkin.create-card', 'params' => []]);
+      return view('Admin.Dashboard.show', ['content' => 'Munchkin.create-card', 'params' => $params]);
     }
 
     /**
@@ -26,6 +32,7 @@ class addCardController extends Controller
     $newCard = $request->validate([
         'title' => 'required|unique:cards|max:255',
         'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'card_category' => 'required'
     ]);
 
     $params['responce'] = true;
@@ -38,6 +45,7 @@ class addCardController extends Controller
     $newCard->description = ($request->description)? $request->description : '';
     $newCard->type = '';
     $newCard->value = 0;
+    $newCard->category_id = $request->card_category;
 
     $newCard->save();
 

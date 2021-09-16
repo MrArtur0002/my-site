@@ -11,5 +11,10 @@
             </ul>
         </div>
         <h1>Категории</h1>
+        @foreach ($params['category'] as $category)
+            <div>
+                {{$category['id']}}) {{$category['name']}}
+            </div>
+        @endforeach
     </div>
 </div>
