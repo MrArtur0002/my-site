@@ -23,12 +23,22 @@
         @error('description')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
+        @error('card_category')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+        @error('type')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
 
         <form action="/admin/munchkin/addCard" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
             @csrf <!-- {{ csrf_field() }} -->
             <div class="form-div">
                 {{ Form::label('card_category', 'Категория карточки') }}
                 {{ Form::select('card_category', $params['categories'])}}
+            </div>
+            <div class="form-div">
+                {{ Form::label('type', 'Категория карточки') }}
+                {{ Form::select('type', ['door' => 'Двери', 'treasure' => 'Сокровища'])}}
             </div>
             <div class="form-div">
                 {{ Form::label('title', 'Название карточки') }}

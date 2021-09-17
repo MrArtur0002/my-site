@@ -17,12 +17,14 @@ class editCardController extends Controller
 
       $categories = Category::all();
 
+      $params['info'] = Card::where('id', $id)->get();
+
       /* Сделать категории в нужный вид */
       foreach ($categories as $key => $category) {
           $params['categories'][$category['id']] = $category['name'];
       }
 
-      $params['info'] = Card::where('id', $id)->get();
+
       return view('Admin.Dashboard.show', ['content' => 'Munchkin.edit-card', 'params' => $params]);
     }
 
@@ -37,13 +39,15 @@ class editCardController extends Controller
     $newCard = $request->validate([
         'title' => 'required|max:255',
         'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'card_category' => 'required'
+        'card_category' => 'required',
+        'type' => 'required'
     ]);
 
     $imageName = '';
 
     $newCard = Card::find($id);
     $newCard->title = $request->title;
+    $newCard->type = $request->type;
     $newCard->category_id = $request->card_category;
     if ($request->image) {
         $imageName = time().'.'.$request->image->extension(); // Рандомное имя файла для нового изображения
@@ -53,6 +57,14 @@ class editCardController extends Controller
     }
 
     $newCard->save();
+
+    $categories = Category::all();
+
+    /* Сделать категории в нужный вид */
+    foreach ($categories as $key => $category) {
+        $params['categories'][$category['id']] = $category['name'];
+    }
+
     $params['responce'] = true;
     $params['id'] = $id;
     $params['info'] = Card::where('id', $id)->get();

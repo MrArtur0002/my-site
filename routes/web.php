@@ -26,6 +26,7 @@ Route::group(
       'prefix' => 'admin',
       'namespace' => 'Admin',
       'as' => 'admin.',
+      'middleware' => ['auth','role:admin']
   ],
   function(){
       Route::get('/',['as' => 'dashboard','uses' => 'DashboardController@show']);
@@ -42,9 +43,23 @@ Route::group(
       Route::get('/munchkin/category',['uses' => 'CategoryController@show']);
 
       Route::get('/munchkin/action',['uses' => 'ActionController@show']);
+
+      Route::get('/munchkin/decks',['uses' => 'DecksController@show']);
   }
 );
 
 Auth::routes();
+Route::get('logout','Auth\LoginController@logout');
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(
+  [
+      'prefix' => 'game',
+      'namespace' => 'Game',
+      'middleware' => ['auth','role:user']
+  ],
+  function(){
+      Route::get('/',['as' => 'dashboard','uses' => 'DashboardController@show']);
+  }
+);

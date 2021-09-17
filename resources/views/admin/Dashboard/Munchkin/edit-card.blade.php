@@ -3,7 +3,7 @@
         @include('admin.Dashboard.Munchkin.parts.mainNav')
     </div>
     <div class="munchkin-content flex-fill">
-        <h1> Создание новой карточки </h1>
+        <h1> Изменение карточки </h1>
         @if (isset($params['responce']))
             <div style="color: white; background-color: green;">Данные успешно сохранены!!!</div>
         @endif
@@ -16,12 +16,35 @@
         @error('description')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
+        @error('card_category')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
 
         <form action="/admin/munchkin/editCard/{{$params['id']}}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
             @csrf <!-- {{ csrf_field() }} -->
             <div class="form-div">
                 {{ Form::label('card_category', 'Категория карточки') }}
-                {{ Form::select('card_category', $params['categories'], null, ['placeholder' => $params['categories'][$params['info'][0]['category_id']]])}}
+                <select id="card_category" name="card_category">
+                    @foreach ($params['categories'] as $key => $category)
+                        @if ($key == $params['info'][0]['category_id'])
+                            <option selected="selected"  value="{{$key}}">{{$category}}</option>
+                        @else
+                            <option value="{{$key}}">{{$category}}</option>
+                        @endif
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-div">
+                {{ Form::label('type', 'Категория карточки') }}
+                <select id="type" name="type">
+                    @if ('treasure' == $params['info'][0]['type'])
+                        <option value="door">Двери</option>
+                        <option selected="selected" value="treasure">Сокровища</option>
+                    @else
+                        <option selected="selected" value="door">Двери</option>
+                        <option value="treasure">Сокровища</option>
+                    @endif
+                </select>
             </div>
             <div class="form-div">
                 {{ Form::label('title', 'Название карточки') }}
@@ -44,7 +67,7 @@
                 {{ Form::label('char', 'Характеристики карточки (Дополнить)') }}
             </div>
             <div class="form-div">
-                {{ Form::submit('Создать') }}
+                {{ Form::submit('Изменить') }}
             </div>
         </form>
     </div>

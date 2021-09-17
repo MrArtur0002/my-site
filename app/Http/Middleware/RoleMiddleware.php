@@ -8,12 +8,13 @@ class RoleMiddleware
 {
     /**
      * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param $request
+     * @param Closure $next
+     * @param $role
+     * @param null $permission
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $role, $permission = null)
     {
         if(!auth()->user()->hasRole($role)) {
             abort(404);

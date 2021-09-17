@@ -32,8 +32,16 @@ class addCardController extends Controller
     $newCard = $request->validate([
         'title' => 'required|unique:cards|max:255',
         'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'card_category' => 'required'
+        'card_category' => 'required',
+        'type' => 'required'
     ]);
+
+    $categories = Category::all();
+
+      /* Сделать категории в нужный вид */
+      foreach ($categories as $key => $category) {
+          $params['categories'][$category['id']] = $category['name'];
+      }
 
     $params['responce'] = true;
     $imageName = time().'.'.$request->image->extension();
@@ -45,6 +53,7 @@ class addCardController extends Controller
     $newCard->description = ($request->description)? $request->description : '';
     $newCard->type = '';
     $newCard->value = 0;
+    $newCard->type = $request->type;
     $newCard->category_id = $request->card_category;
 
     $newCard->save();
