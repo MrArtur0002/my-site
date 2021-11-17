@@ -4,6 +4,6 @@
     <title></title>
 </head>
 <body>
-    Главное меню игры
+    {{$params['count_room']}}
 </body>
 </html>
