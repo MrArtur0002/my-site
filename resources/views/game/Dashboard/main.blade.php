@@ -4,6 +4,6 @@
     <title></title>
 </head>
 <body>
-    {{$params['count_room']}}
+    {{$params['test']}}
 </body>
 </html>

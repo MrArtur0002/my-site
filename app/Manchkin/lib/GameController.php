@@ -14,17 +14,18 @@ final class GameController
 
     protected function __clone() { }
 
-    public function __wakeup()
-    {
+    public function __wakeup() {
         throw new \Exception("Cannot unserialize a singleton.");
     }
 
-    public static function getInstance()
-    {
-        if (null === self::$instance)
-        {
+    public static function getInstance() {
+        if (null === self::$instance) {
             self::$instance = new self();
         }
         return self::$instance;
+    }
+
+    public function getGameLobby($id) {
+        return new GameLobby($id);
     }
 }

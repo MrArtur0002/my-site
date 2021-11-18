@@ -14,10 +14,12 @@ class DashboardController extends Controller
       $params = [];
       $user = auth()->user();
       $room = Room::where('user_id', $user->id)->count();
+      $id_room = 0;
 
       /* Существует ли комната в которой играет пользователь */
       if ($room) {
-        $params['count_room'] = 'Комната существует';
+        $target = Room::where('user_id', $user->id)->first();
+        $id_room = $target->id_room;
       } else {
         $newRoom = new Room;
         $newRoom->description = 'Тестовая версия';
@@ -26,14 +28,16 @@ class DashboardController extends Controller
         $newRoom->current_user_id = $user->id;
         $newRoom->difficulty = 'Легкая';
         $newRoom->id_room = 2;
+        $id_room = 2;
         $newRoom->last_move = date('Y-m-d');
         $newRoom->save();
       }
 
-      $params['count_room'] = $room;
+      $gameController = GameController::getInstance();
 
-      $GameController = GameController::getInstance();
-      //$GameController = new GameController;
+      $lobby = $gameController->getGameLobby($id_room);
+
+      $params['test'] = $lobby->players->getParams();
 
       return view('Game.Dashboard.main', ['content' => '', 'params' => $params]);
     }
