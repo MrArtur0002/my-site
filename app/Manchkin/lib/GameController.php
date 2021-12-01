@@ -28,4 +28,9 @@ final class GameController
     public function getGameLobby($id) {
         return new GameLobby($id);
     }
+
+    public function generateLobby($id) {
+        $lobby =  new GameLobby($id);
+        $lobby->createLobby();
+    }
 }

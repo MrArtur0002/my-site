@@ -16,6 +16,9 @@ class DashboardController extends Controller
       $room = Room::where('user_id', $user->id)->count();
       $id_room = 0;
 
+      // Инициализация общего класса управления игры
+      $gameController = GameController::getInstance();
+
       /* Существует ли комната в которой играет пользователь */
       if ($room) {
         $target = Room::where('user_id', $user->id)->first();
@@ -31,13 +34,12 @@ class DashboardController extends Controller
         $id_room = 2;
         $newRoom->last_move = date('Y-m-d');
         $newRoom->save();
+        $gameController->generateLobby($id_room);
       }
-
-      $gameController = GameController::getInstance();
 
       $lobby = $gameController->getGameLobby($id_room);
 
-      $params['test'] = $lobby->players->getParams();
+      $params['test'] = json_encode($lobby->deck->cards);
 
       return view('Game.Dashboard.main', ['content' => '', 'params' => $params]);
     }

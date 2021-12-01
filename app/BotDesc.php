@@ -4,17 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Deck extends Model
+class BotDesc extends Model
 {
     /**
        * Связанная с моделью таблица.
        *
        * @var string
     */
-    protected $table = 'deck';
+    protected $table = 'game_bot_cards';
 
-    public function deckCards()
-    {
-        return $this->hasMany(DeckCard::class, 'deck_id');
-    }
 }
