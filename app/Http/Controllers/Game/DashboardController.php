@@ -39,7 +39,7 @@ class DashboardController extends Controller
 
       $lobby = $gameController->getGameLobby($id_room);
 
-      $params['test'] = json_encode($lobby->deck->cards);
+      $params['test'] = json_encode($lobby->deck->doors);
 
       return view('Game.Dashboard.main', ['content' => '', 'params' => $params]);
     }
