@@ -4,7 +4,7 @@
     <title></title>
 </head>
 <body>
-    {{$params['test']}}
+
     <!--<button id="start-game" class="start-game">Начать игру</button>-->
    <script type="text/javascript">
         let start = document.getElementById('start-game');

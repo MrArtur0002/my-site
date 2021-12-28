@@ -38,12 +38,10 @@ class DashboardController extends Controller
       }
 
       $lobby = $gameController->getGameLobby($id_room);
+      //$lobby->clearLobby();
 
-      $lobby->deck->generateDecks('doors');
-      $lobby->deck->generateDecks('treasure');
+      //$params['test'] = json_encode($lobby->deck->getCards('doors', 2));
 
-      $params['test'] = json_encode($lobby->deck->cards);
-
-      return view('Game.Dashboard.main', ['content' => '', 'params' => $params]);
+      return view('Game.Dashboard.main', ['content' => '', 'params' => '']);
     }
 }

@@ -1,6 +1,7 @@
 <?php
 namespace App\Manchkin\Lib;
 use App\Manchkin\Lib\Card;
+use App\DeckCard;
 use App\User;
 use App\UserCards;
 
@@ -19,5 +20,26 @@ class Player
 
     public function getParams() {
         return json_encode($this->cards);
+    }
+
+    public function firstGetCard($cards) {
+
+    }
+
+    public function addCardToUser($card, $id_room) {
+        /* Установка состояния */
+        $cardUser = DeckCard::where('id', $card['id'])->where('deck_id', $id_room)->first();
+        if ($cardUser) {
+            $cardUser->active = 3;
+            $cardUser->save();
+        }
+        /* Привязка карты к игроку */
+        $this->cards[$card['id']] = $card;
+        $newCardUser = new UserCards;
+        $newCardUser->active = 1;
+        $newCardUser->user_id = $this->info_player->id;
+        $newCardUser->card_id = $card['id'];
+        $newCardUser->room_id = $id_room;
+        $newCardUser->save();
     }
 }

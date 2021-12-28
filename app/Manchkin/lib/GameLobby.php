@@ -8,6 +8,8 @@ use App\Bot;
 use App\BotDesc;
 use App\RoomProp;
 use App\Deck as ModelDeck;
+use App\UserCards;
+use App\BotCards;
 
 class GameLobby
 {
@@ -50,10 +52,62 @@ class GameLobby
         }
         $room_props->players = $id_bots;
 
+        $this->deck->generateDecks('doors');
+        $this->deck->generateDecks('treasure');
+
         $this->startGame();
     }
 
     private function startGame() {
+        // Получение количества карт и из какой колоды для игрока
+        $doors_user = $this->deck->getCards('doors', 3);
+        $treasure_user = $this->deck->getCards('treasure', 3);
+
+        /* Добавление в инвентарь игрока */
+        foreach ($doors_user as $key => $door_user) {
+            $this->players->addCardToUser($door_user, $this->info_lobby->id_room);
+        }
+        foreach ($treasure_user as $key => $treasure_item) {
+            $this->players->addCardToUser($treasure_item, $this->info_lobby->id_room);
+        }
+
+        /* Раздача карт для ботов */
+        /*for ($i=0; $i < 3; $i++) {
+            $doors_bot = $this->deck->getCards('doors', 3);
+            $treasures_bot = $this->deck->getCards('treasure', 3);
+        }*/
+    }
+
+    /* Удаление лобби */
+    public function clearLobby() {
+        $lobby = Room::find($this->info_lobby->id);
+        if ($lobby != null)
+            $lobby->delete();
+
+        $lobbyProp = RoomProp::where('room_id', $this->info_lobby->id)->get();
+        foreach ($lobbyProp as $prop) {
+            if ($prop != null)
+                $prop->delete();
+        }
+
+        /* Пользователи */
+        $user_cards = UserCards::where('room_id', $this->info_lobby->id)->get();
+        foreach ($user_cards as $user) {
+            if ($user != null)
+                $user->delete();
+        }
+
+        /* Боты */
+        $bot_cards = BotCards::where('room_id', $this->info_lobby->id)->get();
+        foreach ($bot_cards as $bot) {
+            if ($bot != null)
+                $bot->delete();
+        }
+        $bots = Bot::where('room_id', $this->info_lobby->id)->get();
+        foreach ($bots as $bot) {
+            if ($bot != null)
+                $bot->delete();
+        }
 
     }
 }

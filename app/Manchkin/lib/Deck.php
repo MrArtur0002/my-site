@@ -19,18 +19,42 @@ class Deck
         foreach ($all_id_cards as $card) {
             $tekCard = ModelCard::find($card->card_id);
             if ($tekCard->type == 'door') {
-                $this->doors[$card->id] = [$tekCard->type, $tekCard->title, $tekCard->image, $tekCard->value, $tekCard->description];
-                $this->cards[$card->id] = [$card->active, $card->index, 'doors'];
+                $this->doors[$card->id] = [
+                    'type' => $tekCard->type,
+                    'title' => $tekCard->title,
+                    'imageName' => $tekCard->image,
+                    'value' => $tekCard->value,
+                    'description' => $tekCard->description,
+                    'index' => $card->index,
+                    'active' => $card->active,
+                    'id' => $card->id];
+                $this->cards[$card->id] = [
+                    'active' => $card->active,
+                    'index' => $card->index,
+                    'type' => 'doors',
+                    'id' => $card->id ];
             }
             else {
-                $this->treasure[$card->id] = [$tekCard->type, $tekCard->title, $tekCard->image, $tekCard->value, $tekCard->description];
-                $this->cards[$card->id] = [$card->active, $card->index, 'tresure'];
+                $this->treasure[$card->id] = [
+                    'type' => $tekCard->type,
+                    'title' => $tekCard->title,
+                    'image' => $tekCard->image,
+                    'value' => $tekCard->value,
+                    'description' => $tekCard->description,
+                    'index' => $card->index,
+                    'active' => $card->active,
+                    'id' => $card->id ];
+                $this->cards[$card->id] = [
+                    'active' => $card->active,
+                    'index' => $card->index,
+                    'type' => 'tresure',
+                    'id' => $card->id ];
             }
         }
     }
 
     /**
-     * Функция перетасовывает определенную колоду (Все карты с active 1 - в колоде, 2 - сброс. 3 и 4 не перемешиваются)
+     * Функция перетасовывает определенную колоду (Все карты с active 1 - в колоде, 2 - сброс, 3 игрок, 4 бот)
      *
      * @param $type enum(tresure, door) тип перемешиваемой колоды
      *
@@ -43,7 +67,7 @@ class Deck
                 $array_order_door = [];
 
                 foreach ($this->cards as $key => $card) {
-                    if ($card[2] == 'doors' && ($card[0] == '1' || $card[0] == '2')) {
+                    if ($card['type'] == 'doors' && ($card['active'] == '1' || $card['active'] == '2')) {
                         $array_order_door[$count_order_door] = $key;
                         $count_order_door++;
                     }
@@ -56,8 +80,8 @@ class Deck
                         $tekCard->index = $order + 1;
                         $tekCard->active = 1; // Возвращаем в колоду
                         $tekCard->save();
-                        $this->cards[$door][1] = $order + 1;
-                        $this->cards[$door][0] = 1;
+                        $this->cards[$door]['index'] = $order + 1;
+                        $this->cards[$door]['active'] = 1;
                     }
                 }
             break;
@@ -66,7 +90,7 @@ class Deck
                 $array_order_treasure = [];
 
                 foreach ($this->cards as $key => $card) {
-                    if ($card[2] == 'tresure' && ($card[0] == '1' || $card[0] == '2')) {
+                    if ($card['type'] == 'tresure' && ($card['active'] == '1' || $card['active'] == '2')) {
                         $array_order_treasure[] = $key;
                     }
                 }
@@ -77,24 +101,53 @@ class Deck
                     $tekCard = DeckCard::find($treasure);
                     $tekCard->index = $order + 1;
                     $tekCard->save();
-                    $this->cards[$treasure][1] = $order + 1;
+                    $this->cards[$treasure]['index'] = $order + 1;
                 }
             break;
         }
     }
 
     /**
-     * Функция прикрепляет карту с колоды определенном игроку и помечает в колоде как уже используемую.
+     * Функция возвращает определенной количество карт с определенной колоды
      *
-     * @param int   $id_person id персонажа
-     * @param boolean $isBot Является ли данный игрок - ботом.
+     * @param enum('doors', 'treasure')   $type тип колоды
+     * @param integer $count количество карт
      *
      */
-    public function getCard($id_person, $isBot = false) {
-        if ($isBot) {
+    public function getCards($type, $count = 0) {
+        switch ($type) {
+            case 'doors':
+                $result = Array();
+                usort($this->doors, $this->build_sorter('index'));
+                for ($i=0; $i < $count; $i++) {
+                    $key_array = array_key_first($this->doors);
+                    $result[] = $this->doors[$key_array];
+                    unset($this->doors[$key_array]);
+                }
+                return $result;
+            break;
 
-        } else {
+            case 'treasure':
+                $result = Array();
+                usort($this->treasure, $this->build_sorter('index'));
+                for ($i=0; $i < $count; $i++) {
+                    $key_array = array_key_first($this->treasure);
+                    $result[] = $this->treasure[$key_array];
+                    unset($this->treasure[$key_array]);
+                }
+                return $result;
+            break;
 
+            default:
+
+            return [];
         }
+    }
+
+    public static function build_sorter($key) {
+        return function ($item1, $item2) use ($key) {
+            if ($item1[$key] == $item2[$key]) return 0;
+            return ($item1[$key] < $item2[$key]) ? 1 : -1;
+        };
     }
 }
