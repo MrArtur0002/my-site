@@ -26,7 +26,7 @@ class GameLobby
     public function __construct($id_lobby) {
         $this->info_lobby = Room::where('id_room', $id_lobby)->first();
         $this->players = new Player($this->info_lobby->user_id);
-        $this->deck = new Deck($this->info_lobby->deck_id);
+        $this->deck = new Deck($this->info_lobby->id_room);
     }
 
     public function getParams() {
@@ -36,6 +36,8 @@ class GameLobby
     public function createLobby() {
         $room_props = new RoomProp;
         $room_props->room_id = $this->info_lobby->id;
+
+        $this->deck->createDeckToRoom($this->info_lobby->deck_id ,$this->info_lobby->id);
 
         $id_bots = '';
         /* Создание ботов */
@@ -65,10 +67,10 @@ class GameLobby
 
         /* Добавление в инвентарь игрока */
         foreach ($doors_user as $key => $door_user) {
-            $this->players->addCardToUser($door_user, $this->info_lobby->id_room);
+            $this->players->addCardToUser($door_user, $this->info_lobby->id);
         }
         foreach ($treasure_user as $key => $treasure_item) {
-            $this->players->addCardToUser($treasure_item, $this->info_lobby->id_room);
+            $this->players->addCardToUser($treasure_item, $this->info_lobby->id);
         }
 
         /* Раздача карт для ботов */

@@ -4,6 +4,7 @@ use App\Manchkin\Lib\Card;
 use App\DeckCard;
 use App\Bot as BotUser;
 use App\BotCards;
+use App\RoomCards;
 
 class Bot
 {
@@ -28,7 +29,7 @@ class Bot
 
     public function addCardToUser($card, $id_room) {
         /* Установка состояния */
-        $cardBot = DeckCard::where('id', $card['id'])->where('deck_id', $id_room)->first();
+        $cardBot = RoomCards::where('id', $card['id'])->where('deck_id', $id_room)->first();
         if ($cardBot) {
             $cardBot->active = 3;
             $cardBot->save();
@@ -39,7 +40,7 @@ class Bot
         $newCardBot = new BotCards;
         $newCardBot->active = 1;
         $newCardBot->user_id = $this->info_player->id;
-        $newCardBot->card_id = $card['id'];
+        $newCardBot->card_id = $card['id_card'];
         $newCardBot->room_id = $id_room;
     }
 }

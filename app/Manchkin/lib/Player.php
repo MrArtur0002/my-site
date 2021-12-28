@@ -4,6 +4,7 @@ use App\Manchkin\Lib\Card;
 use App\DeckCard;
 use App\User;
 use App\UserCards;
+use App\RoomCards;
 
 class Player
 {
@@ -28,7 +29,7 @@ class Player
 
     public function addCardToUser($card, $id_room) {
         /* Установка состояния */
-        $cardUser = DeckCard::where('id', $card['id'])->where('deck_id', $id_room)->first();
+        $cardUser = RoomCards::where('id', $card['id'])->where('room_id', $id_room)->first();
         if ($cardUser) {
             $cardUser->active = 3;
             $cardUser->save();
@@ -38,7 +39,7 @@ class Player
         $newCardUser = new UserCards;
         $newCardUser->active = 1;
         $newCardUser->user_id = $this->info_player->id;
-        $newCardUser->card_id = $card['id'];
+        $newCardUser->card_id = $card['id_card'];
         $newCardUser->room_id = $id_room;
         $newCardUser->save();
     }

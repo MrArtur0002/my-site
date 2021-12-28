@@ -3,6 +3,7 @@ namespace App\Manchkin\Lib;
 use App\Manchkin\Lib\Card;
 use App\Deck as ModelDeck;
 use App\Card as ModelCard;
+use App\RoomCards;
 use App\DeckCard;
 
 class Deck
@@ -12,11 +13,47 @@ class Deck
     public $doors;
     public $treasure;
 
-    public function __construct($id_deck) {
-        $this->deck_info = ModelDeck::find($id_deck);
+    public function __construct($id_room) {
+        /*$this->deck_info = ModelDeck::find($id_deck);
 
         $all_id_cards = $this->deck_info->deckCards()->get();
         foreach ($all_id_cards as $card) {
+            $tekCard = ModelCard::find($card->card_id);
+            if ($tekCard->type == 'door') {
+                $this->doors[$card->id] = [
+                    'type' => $tekCard->type,
+                    'title' => $tekCard->title,
+                    'imageName' => $tekCard->image,
+                    'value' => $tekCard->value,
+                    'description' => $tekCard->description,
+                    'index' => $card->index,
+                    'active' => $card->active,
+                    'id' => $card->id];
+                $this->cards[$card->id] = [
+                    'active' => $card->active,
+                    'index' => $card->index,
+                    'type' => 'doors',
+                    'id' => $card->id ];
+            }
+            else {
+                $this->treasure[$card->id] = [
+                    'type' => $tekCard->type,
+                    'title' => $tekCard->title,
+                    'image' => $tekCard->image,
+                    'value' => $tekCard->value,
+                    'description' => $tekCard->description,
+                    'index' => $card->index,
+                    'active' => $card->active,
+                    'id' => $card->id ];
+                $this->cards[$card->id] = [
+                    'active' => $card->active,
+                    'index' => $card->index,
+                    'type' => 'tresure',
+                    'id' => $card->id ];
+            }
+        }*/
+        $all_id_cards = RoomCards::where('room_id', $id_room)->get();
+        foreach ($all_id_cards as $key => $card) {
             $tekCard = ModelCard::find($card->card_id);
             if ($tekCard->type == 'door') {
                 $this->doors[$card->id] = [
@@ -75,7 +112,7 @@ class Deck
 
                 shuffle($array_order_door);
                 foreach ($array_order_door as $order => $door) {
-                    $tekCard = DeckCard::find($door);
+                    $tekCard = RoomCards::find($door);
                     if (isset($tekCard)) {
                         $tekCard->index = $order + 1;
                         $tekCard->active = 1; // Возвращаем в колоду
@@ -98,7 +135,7 @@ class Deck
                 shuffle($array_order_treasure);
 
                 foreach ($array_order_treasure as $order => $treasure) {
-                    $tekCard = DeckCard::find($treasure);
+                    $tekCard = RoomCards::find($treasure);
                     $tekCard->index = $order + 1;
                     $tekCard->save();
                     $this->cards[$treasure]['index'] = $order + 1;
@@ -149,5 +186,59 @@ class Deck
             if ($item1[$key] == $item2[$key]) return 0;
             return ($item1[$key] < $item2[$key]) ? 1 : -1;
         };
+    }
+
+    public function createDeckToRoom($id_deck, $id_room) {
+        $this->deck_info = ModelDeck::find($id_deck);
+
+        $all_id_cards = $this->deck_info->deckCards()->get();
+
+        foreach ($all_id_cards as $key => $card) {
+            $newCard = new RoomCards;
+            $newCard->room_id = $id_room;
+            $newCard->card_id = $card->card_id;
+            $newCard->active = 1;
+            $newCard->index = 1;
+            $newCard->save();
+
+            $tekCard = ModelCard::find($card->card_id);
+
+            if ($tekCard->type == 'door') {
+                $this->doors[$newCard->id] = [
+                    'type' => $tekCard->type,
+                    'title' => $tekCard->title,
+                    'imageName' => $tekCard->image,
+                    'value' => $tekCard->value,
+                    'description' => $tekCard->description,
+                    'index' => $card->index,
+                    'active' => $card->active,
+                    'id' => $newCard->id,
+                    'id_card' => $tekCard->id];
+                $this->cards[$newCard->id] = [
+                    'active' => $card->active,
+                    'index' => $card->index,
+                    'type' => 'doors',
+                    'id' => $newCard->id,
+                    'id_card' => $tekCard->id];
+            }
+            else {
+                $this->treasure[$newCard->id] = [
+                    'type' => $tekCard->type,
+                    'title' => $tekCard->title,
+                    'image' => $tekCard->image,
+                    'value' => $tekCard->value,
+                    'description' => $tekCard->description,
+                    'index' => $card->index,
+                    'active' => $card->active,
+                    'id' => $newCard->id,
+                    'id_card' => $tekCard->id ];
+                $this->cards[$newCard->id] = [
+                    'active' => $card->active,
+                    'index' => $card->index,
+                    'type' => 'tresure',
+                    'id' => $newCard->id,
+                    'id_card' => $tekCard->id ];
+            }
+        }
     }
 }
